@@ -2,8 +2,8 @@
 FROM php:8.2-apache
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git unzip libzip-dev \
-    && docker-php-ext-install pdo_mysql zip \
+    && apt-get install -y --no-install-recommends unzip \
+    && docker-php-ext-install -j"$(nproc)" pdo_mysql \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
 
