@@ -11,7 +11,7 @@ class Pointage extends Model
     public $timestamps = false;
     protected $table = "pointage";
     protected $primaryKey="pointage";
-    protected $fillable = ['date', 'userIdUser', 'presence'];
+    protected $fillable = ['date', 'userIdUser', 'presense'];
     public function user()
     {
         return $this->belongsTo(User::class, 'userIdUser', 'id_user');

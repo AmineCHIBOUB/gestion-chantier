@@ -15,7 +15,7 @@ class TypeUserController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'label' => ['required', 'string', Rule::unique('type_users')]
+            'label' => ['required', 'string', Rule::unique('type_user')]
         ]);
 
         $typeUser = TypeUser::create([
@@ -28,7 +28,7 @@ class TypeUserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'label' => ['required', 'string', Rule::unique('type_users')->ignore($id, 'id_type')]
+            'label' => ['required', 'string', Rule::unique('type_user')->ignore($id, 'id_type')]
         ]);
 
         $typeUser = TypeUser::findOrFail($id);

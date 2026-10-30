@@ -30,7 +30,7 @@ class User  extends Authenticatable implements JWTSubject
     protected $fillable = ['name', 'prenom', 'cin', 'email', 'password', 'activeSession', 'restraction'];
     public function pointages()
     {
-        return $this->hasMany(Pointage::class, 'userIdUser', 'id');
+        return $this->hasMany(Pointage::class, 'userIdUser', 'id_user');
     }
     public function demandesconges()
     {
@@ -49,6 +49,6 @@ class User  extends Authenticatable implements JWTSubject
 
    public function chantiers()
    {
-       return $this->belongsToMany(Chantier::class, 'user_id', 'chantier_id');
+       return $this->belongsToMany(Chantier::class, 'affectation', 'userIdUser', 'chantierIdChantier');
    }
 }

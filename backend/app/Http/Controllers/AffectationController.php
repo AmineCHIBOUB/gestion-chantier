@@ -15,7 +15,7 @@ class AffectationController extends Controller
             'chantier' => 'required|numeric',
         ]);
 
-        $affectation = Affectation::create($validatedData);
+        $affectation = Affectation::create($this->toColumns($validatedData));
 
         return response()->json(['message' => 'Affectation created successfully', 'data' => $affectation]);
     }
@@ -31,9 +31,19 @@ class AffectationController extends Controller
             'chantier' => 'required|numeric',
         ]);
 
-        $affectation->update($validatedData);
+        $affectation->update($this->toColumns($validatedData));
 
         return response()->json(['message' => 'Affectation updated successfully', 'data' => $affectation]);
+    }
+
+    private function toColumns(array $data): array
+    {
+        return [
+            'date_debut' => $data['date_debut'],
+            'date_fin' => $data['date_fin'],
+            'userIdUser' => $data['user'],
+            'chantierIdChantier' => $data['chantier'],
+        ];
     }
 
     public function delete($id)

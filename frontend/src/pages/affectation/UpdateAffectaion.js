@@ -89,7 +89,7 @@ const UpdateAffectaion = () => {
       date_debut: selectedDe,
       date_fin: selectedA,
     }
-    axios.put("http://localhost:8000/api/affectations" + param.id, data).then((res) => {
+    axios.put("http://localhost:8000/api/affectations/" + param.id, data).then((res) => {
       setOpen(true)
       setsnackmsg("Affectation bien changer  redirection dans 5s")
       setsnackv("info")

@@ -11,5 +11,5 @@ class Habilite extends Model
     public $timestamps = false;
     protected $table = "habilite";
     protected $primaryKey="id_habilite";
-    protected $fillable = ['user', 'label'];
+    protected $fillable = ['userIdUser', 'label'];
 }

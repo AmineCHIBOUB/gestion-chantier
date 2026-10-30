@@ -49,7 +49,8 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user()->update(['activeSession' => null]);
+        JWTAuth::invalidate(JWTAuth::getToken());
         return response()->json(['message' => 'User logged out successfully']);
     }
 

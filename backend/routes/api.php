@@ -12,22 +12,23 @@ use App\Http\Controllers\AffectationController;
 use App\Http\Controllers\ChantierController;
 use Illuminate\Support\Facades\Route;
 
-// Routes pour l'authentification
+// Route publique : connexion
 Route::post('user/login', [UserController::class, 'login']);
-// Route::post('user/login', [UserController::class, 'login'])->name('login');
+
+// Toutes les autres routes demandent un jeton JWT valide
+Route::middleware('auth:api')->group(function () {
+
 Route::post('user/register', [UserController::class, 'register']);
-Route::middleware('auth:sanctum')->post('user/logout', [UserController::class, 'logout']);
-Route::middleware('auth:sanctum')->post('user/verifyToken', [UserController::class, 'verifyToken']);
+Route::post('user/logout', [UserController::class, 'logout']);
+Route::post('user/verifyToken', [UserController::class, 'verifyToken']);
 
 // Routes pour la gestion des utilisateurs
-
-    Route::get('/user', [UserController::class, 'index']);
-    Route::post('/user/create', [UserController::class, 'create']);//pour crees un utilisateur
-    Route::get('/user/{id}', [UserController::class, 'show']); // Afficher un utilisateur
-    Route::put('/user/{id}', [UserController::class, 'update']); // Mettre à jour un utilisateur
-    Route::delete('/user/{id}', [UserController::class, 'delete']); // Supprimer un utilisateur
-    Route::get('/users/{id}/chantiers', [UserController::class, 'chantiersUtilisateur']);
-        // 'UserController@chantiersUtilisateur'
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/user/create', [UserController::class, 'create']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::put('/user/{id}', [UserController::class, 'update']);
+Route::delete('/user/{id}', [UserController::class, 'delete']);
+Route::get('/users/{id}/chantiers', [UserController::class, 'chantiersUtilisateur']);
 
 Route::get('/type-user', [TypeUserController::class, 'index']);
 Route::post('/type-user/create', [TypeUserController::class, 'create']);
@@ -81,3 +82,5 @@ Route::delete('/affectations/{id}', [AffectationController::class, 'delete']);
 Route::get('/affectations/{id}', [AffectationController::class, 'show']);
 Route::get('/affectations', [AffectationController::class, 'index']);
 Route::get('/affectations/user/{id}', [AffectationController::class, 'getByUser']);
+
+});
