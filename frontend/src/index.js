@@ -5,14 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-// Adresse de l'API en production (définie au build), localhost:8000 sinon
-const API_URL = process.env.REACT_APP_API_URL;
-
 // Envoie le jeton JWT avec chaque appel à l'API
 axios.interceptors.request.use((config) => {
-  if (API_URL && config.url) {
-    config.url = config.url.replace('http://localhost:8000', API_URL);
-  }
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
